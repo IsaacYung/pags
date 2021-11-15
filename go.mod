@@ -1,4 +1,4 @@
-module github.com/deepakvashist/go-pagseguro
+module github.com/IsaacYung/pags
 
 go 1.16
 
