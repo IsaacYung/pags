@@ -14,7 +14,7 @@ PagSeguro's dashboards:
 ## Usage
 
 ```golang
-client := pagsv4client.NewClient(<baseURL>, <token>, <retryCount>, <timeout>, <retryWait>, <retryMaxWait>)
+client := pags.NewClient(<baseURL>, <token>, <retryCount>, <timeout>, <retryWait>, <retryMaxWait>)
 ```
 
 ### Credit card
@@ -22,23 +22,23 @@ client := pagsv4client.NewClient(<baseURL>, <token>, <retryCount>, <timeout>, <r
 #### Authorize transaction
 
 ```golang
-charge := pagsv4client.Charge{
+charge := pags.Charge{
     ReferenceID: "sample-reference-id",
     Description: "Sample description",
-    Amount: pagsv4client.Amount{
+    Amount: pags.Amount{
         Value:    17000,
         Currency: "BRL",
     },
-    PaymentMethod: &pagsv4client.PaymentMethod{
+    PaymentMethod: &pags.PaymentMethod{
         Type:         "CREDIT_CARD",
         Installments: 1,
         Capture:      false,
-        Card: pagsv4client.Card{
+        Card: pags.Card{
             Number:       "4111111111111111",
             ExpMonth:     "03",
             ExpYear:      "2026",
             SecurityCode: "123",
-            Holder: &pagsv4client.Holder{
+            Holder: &pags.Holder{
                 Name: "Neil Armstrong",
             },
         },
@@ -51,8 +51,8 @@ response, err := client.Charge(&charge)
 #### Capture transaction
 
 ```golang
-charge := pagsv4client.Charge{
-    Amount: pagsv4client.Amount{
+charge := pags.Charge{
+    Amount: pags.Amount{
         Value: 17000,
     },
 }
@@ -63,8 +63,8 @@ response, err := client.Capture(<tid>, &charge)
 #### Cancel transaction
 
 ```golang
-charge := pagsv4client.Charge{
-    Amount: pagsv4client.Amount{
+charge := pags.Charge{
+    Amount: pags.Amount{
         Value: 15000,
     },
 }
@@ -75,26 +75,26 @@ response, err := client.Cancel(<tid>, &charge)
 ### Boleto
 
 ```golang
-charge := pagsv4client.Charge{
+charge := pags.Charge{
     ReferenceID: "sample-reference-id",
     Description: "Sample charge",
-    Amount: pagsv4client.Amount{
+    Amount: pags.Amount{
         Value:    17000,
         Currency: "BRL",
     },
-    PaymentMethod: pagsv4client.PaymentMethod{
+    PaymentMethod: pags.PaymentMethod{
         Type: "BOLETO",
-        Boleto: &pagsv4client.Boleto{
+        Boleto: &pags.Boleto{
             DueDate: "1969-07-20",
-            InstructionLines: pagsv4client.InstructionLines{
+            InstructionLines: pags.InstructionLines{
                 Line1: "Sample line 1",
                 Line2: "Sample line 2",
             },
-            Holder: pagsv4client.Holder{
+            Holder: pags.Holder{
                 Name:  "Neil Armstrong",
                 TaxID: "46274361499",
                 Email: "neil.armstrong@nasa.dev",
-                Address: &pagsv4client.Address{
+                Address: &pags.Address{
                     Country:    "Brazil",
                     Region:     "Rio Grande do Sul",
                     RegionCode: "RS",
