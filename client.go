@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"time"
 
 	"github.com/go-resty/resty/v2"
 )
@@ -65,7 +64,7 @@ func (c Client) request(resource string, body *Charge) (*Charge, error) {
 }
 
 // NewClient returns PagSeguro v4 API client.
-func NewClient(baseURL, token string, retryCount int, timeout, retryWait, retryMaxWait time.Duration) *Client {
+func NewClient(baseURL, token string) *Client {
 	httpClient := resty.New().
 		SetHostURL(baseURL).
 		SetHeader("Content-Type", "application/json").

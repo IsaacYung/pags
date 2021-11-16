@@ -5,13 +5,11 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func TestClient(t *testing.T) {
-	timeout := time.Second
 	tid := "CHAR_878B0CA5-DE08-4CCC-855D-938DC19C0A50"
 	successBody := fmt.Sprintf(`{"id": "%s"}`, tid)
 	errorBody := `{"error_messages":[{"code":"00000","message":"error."}]}`
@@ -23,7 +21,7 @@ func TestClient(t *testing.T) {
 		}))
 		defer ts.Close()
 
-		client := NewClient(ts.URL, "token", 0, timeout, timeout, timeout)
+		client := NewClient(ts.URL, "token")
 		charge := Charge{}
 
 		result, err := client.Charge(&charge)
@@ -40,7 +38,7 @@ func TestClient(t *testing.T) {
 		}))
 		defer ts.Close()
 
-		client := NewClient(ts.URL, "token", 0, timeout, timeout, timeout)
+		client := NewClient(ts.URL, "token")
 		charge := Charge{}
 
 		result, err := client.Charge(&charge)
@@ -56,7 +54,7 @@ func TestClient(t *testing.T) {
 		}))
 		defer ts.Close()
 
-		client := NewClient(ts.URL, "token", 0, timeout, timeout, timeout)
+		client := NewClient(ts.URL, "token")
 		charge := Charge{}
 
 		result, err := client.Capture(tid, &charge)
@@ -73,7 +71,7 @@ func TestClient(t *testing.T) {
 		}))
 		defer ts.Close()
 
-		client := NewClient(ts.URL, "token", 0, timeout, timeout, timeout)
+		client := NewClient(ts.URL, "token")
 		charge := Charge{}
 
 		result, err := client.Capture(tid, &charge)
@@ -89,7 +87,7 @@ func TestClient(t *testing.T) {
 		}))
 		defer ts.Close()
 
-		client := NewClient(ts.URL, "token", 0, timeout, timeout, timeout)
+		client := NewClient(ts.URL, "token")
 		charge := Charge{}
 
 		result, err := client.Cancel(tid, &charge)
@@ -106,7 +104,7 @@ func TestClient(t *testing.T) {
 		}))
 		defer ts.Close()
 
-		client := NewClient(ts.URL, "token", 0, timeout, timeout, timeout)
+		client := NewClient(ts.URL, "token")
 		charge := Charge{}
 
 		result, err := client.Cancel(tid, &charge)
