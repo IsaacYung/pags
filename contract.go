@@ -39,6 +39,8 @@ type Holder struct {
 
 // Card represents the charge payment method card.
 type Card struct {
+	ID           string  `json:"id,omitempty"`
+	Store        bool    `json:"store,omitempty"`
 	Number       string  `json:"number,omitempty"`
 	SecurityCode string  `json:"security_code,omitempty"`
 	Encrypted    string  `json:"encrypted,omitempty"`
